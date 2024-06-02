@@ -1,0 +1,2 @@
+name,slug,description,discountPercentage,amountCourse,priceAmount,startDate,endDate,courseId
+Spring Boot,Summer sale 2024,Spring Boot JPA,20,null,null,2024-04-27,2024-05-20,4
