@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: category_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: category
+            file: db/changelog/data/changelog-008-category.csv
+            columns:
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: STRING

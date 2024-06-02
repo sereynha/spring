@@ -1,0 +1,280 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_db_structure
+      author: sereypanah14@gmail.com
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 50
+            sequenceName: token_seq
+            startValue: 1
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_avatar
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: url
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: BIGINT
+            tableName: avatar
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_category
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
+              - column:
+                  name: update_at
+                  type: DATETIME
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(64)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+            tableName: category
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_course
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(64)
+              - column:
+                  name: price
+                  type: DECIMAL
+              - column:
+                  name: image
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+            tableName: course
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_permissions
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(64)
+            tableName: permissions
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_roles
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(64)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+            tableName: roles
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_roles_permissions
+                  name: role_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_roles_permissions
+                  name: permissions_id
+                  type: BIGINT
+            tableName: roles_permissions
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_token
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: token
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: expires_at
+                  type: DATETIME
+              - column:
+                  name: validated_at
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: BIGINT
+            tableName: token
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
+              - column:
+                  name: update_at
+                  type: DATETIME
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(64)
+              - column:
+                  name: last_name
+                  type: VARCHAR(64)
+              - column:
+                  name: password
+                  type: VARCHAR(100)
+              - column:
+                  name: email
+                  type: VARCHAR(100)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(16)
+              - column:
+                  name: dob
+                  type: VARCHAR(30)
+              - column:
+                  name: job
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: account_non_expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: account_non_locked
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: credentials_non_expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enabled
+                  type: BOOLEAN
+            tableName: users
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users_roles
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users_roles
+                  name: roles_id
+                  type: BIGINT
+            tableName: users_roles
+        - addUniqueConstraint:
+            columnNames: token
+            constraintName: uc_token_token
+            tableName: token
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uc_users_email
+            tableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: avatar
+            constraintName: FK_AVATAR_ON_USER
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: token
+            constraintName: FK_TOKEN_ON_USERID
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: permissions_id
+            baseTableName: roles_permissions
+            constraintName: fk_rolper_on_permission
+            referencedColumnNames: id
+            referencedTableName: permissions
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: roles_permissions
+            constraintName: fk_rolper_on_role
+            referencedColumnNames: id
+            referencedTableName: roles
+        - addForeignKeyConstraint:
+            baseColumnNames: roles_id
+            baseTableName: users_roles
+            constraintName: fk_userol_on_role
+            referencedColumnNames: id
+            referencedTableName: roles
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: users_roles
+            constraintName: fk_userol_on_user
+            referencedColumnNames: id
+            referencedTableName: users
+

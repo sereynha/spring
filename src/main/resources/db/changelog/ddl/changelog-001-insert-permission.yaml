@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: permission_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: permissions
+            file: db/changelog/data/changelog-001-permission.csv
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_permissions
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING

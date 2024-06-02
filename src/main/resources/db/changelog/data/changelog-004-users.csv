@@ -1,0 +1,4 @@
+first_name,last_name,password,email,phone_number,dob,job,account_non_expired,account_non_locked,credentials_non_expired,enabled,create_at,created_by
+Net,Sokpheng,$2a$10$Kel22S/Hq2AvLYyogt6W/eYyRkWEyIEDAkVCQBMvChw6gLgRvhdDO,pheng@gmail.com,093333339,12-05-2003,student,false,false,false,true,2024-05-10 01:01:06.792915,pheng@gmail.com
+Rithy,Maleng,$2a$10$Kel22S/Hq2AvLYyogt6W/eYyRkWEyIEDAkVCQBMvChw6gLgRvhdDO,Leng@gmail.com,029999922,10-01-2002,developer,false,false,false,true,2024-05-10 01:01:06.792915,Leng@gmail.com
+Serey,Panha,$2a$10$Kel22S/Hq2AvLYyogt6W/eYyRkWEyIEDAkVCQBMvChw6gLgRvhdDO,Panha@gmail.com,016354006,10-05-2002,developer,false,false,false,true,2024-05-10 01:01:06.792915,Panha@gmail.com

@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: avatar_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: avatar
+            file: db/changelog/data/changelog-007-avatar.csv
+            columns:
+              - column:
+                  name: url
+                  type: STRING
+              - column:
+                  name: user_id
+                  type: NUMERIC

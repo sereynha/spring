@@ -1,0 +1,28 @@
+services:
+  postgres:
+    container_name: postgres-school
+    image: postgres
+    environment:
+      - 'POSTGRES_DB=school_assigment'
+      - 'POSTGRES_PASSWORD=nha@12345'
+      - 'POSTGRES_USER=panhaserey'
+    ports:
+      - '5432:5432'
+    networks:
+      - 'default'
+    volumes:
+      - './postgres_data:/var/lib/postgresql/data'
+  mail-dev:
+    container_name: mail-dev-bsn
+    image: maildev/maildev
+    ports:
+      - '1080:1080'
+      - '1025:1025'
+networks:
+  spring-demo:
+    driver: 'bridge'
+  default:
+    driver: 'bridge'
+volumes:
+  postgres_data:
+    driver: 'local'

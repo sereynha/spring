@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: role_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: roles
+            file: db/changelog/data/changelog-002-roles.csv
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_roles
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: description
+                  type: STRING

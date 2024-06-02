@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: users_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: users
+            file: db/changelog/data/changelog-004-users.csv
+            columns:
+              - column:
+                  name: first_name
+                  type: STRING
+              - column:
+                  name: last_name
+                  type: STRING
+              - column:
+                  name: password
+                  type: STRING
+              - column:
+                  name: email
+                  type: STRING
+              - column:
+                  name: phone_number
+                  type: STRING
+              - column:
+                  name: dob
+                  type: STRING
+              - column:
+                  name: job
+                  type: STRING
+              - column:
+                  constraints:
+                    nullable: false
+                  name: account_non_expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: account_non_locked
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: credentials_non_expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enabled
+                  type: BOOLEAN
+              - column:
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: STRING
+
+
+
+# password $2a$10$Kel22S/Hq2AvLYyogt6W/eYyRkWEyIEDAkVCQBMvChw6gLgRvhdDO = 123123123

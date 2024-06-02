@@ -1,0 +1,9 @@
+name
+user:read
+user:update
+user:create
+user:delete
+admin:read
+admin:update
+admin:create
+admin:delete

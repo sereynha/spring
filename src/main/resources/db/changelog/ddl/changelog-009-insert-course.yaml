@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: course_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: course
+            file: db/changelog/data/changelog-009-course.csv
+            columns:
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: price
+                  type: NUMERIC
+              - column:
+                  name: lectures
+                  type: NUMERIC
+              - column:
+                  name: total_hours
+                  type: NUMERIC
+              - column:
+                  name: description
+                  type: STRING
+              - column:
+                  name: category_id
+                  type: NUMERIC
+              - column:
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: STRING

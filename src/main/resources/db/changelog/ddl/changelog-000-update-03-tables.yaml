@@ -1,0 +1,294 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_db_structure_update_3
+      author: sereypanah14@gmail.com
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_payment
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: VARCHAR(64)
+              - column:
+                  name: update_at
+                  type: DATETIME
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(64)
+              - column:
+                  name: total_payment
+                  type: DECIMAL
+              - column:
+                  name: payment_method
+                  type: VARCHAR(255)
+              - column:
+                  name: payment_status
+                  type: VARCHAR(255)
+            tableName: payment
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_payment_course
+                  name: payment_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_payment_course
+                  name: course_id
+                  type: BIGINT
+            tableName: payment_course
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_promotion
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: VARCHAR(64)
+              - column:
+                  name: update_at
+                  type: DATETIME
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(64)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: slug
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: discount_percentage
+                  type: BIGINT
+              - column:
+                  name: amount_course
+                  type: BIGINT
+              - column:
+                  name: price_amount
+                  type: DECIMAL
+              - column:
+                  defaultValueBoolean: true
+                  name: is_active
+                  type: boolean
+              - column:
+                  name: start_date
+                  type: DATETIME
+              - column:
+                  name: end_date
+                  type: DATETIME
+            tableName: promotion
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_promotion_course
+                  name: promotion_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_promotion_course
+                  name: course_id
+                  type: BIGINT
+            tableName: promotion_course
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_rating
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: VARCHAR(64)
+              - column:
+                  name: update_at
+                  type: DATETIME
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(64)
+              - column:
+                  name: content
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: rating_star
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: course_id
+                  type: BIGINT
+            tableName: rating
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_video
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: create_at
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: VARCHAR(64)
+              - column:
+                  name: update_at
+                  type: DATETIME
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(64)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: slug
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(64)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: link_url
+                  type: VARCHAR(255)
+              - column:
+                  name: image_cover
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_published
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: course_id
+                  type: BIGINT
+            tableName: video
+        - addColumn:
+            columns:
+              - column:
+                  defaultValueBoolean: false
+                  name: is_active
+                  type: boolean
+            tableName: course
+        - addForeignKeyConstraint:
+            baseColumnNames: course_id
+            baseTableName: rating
+            constraintName: FK_RATING_ON_COURSEID
+            referencedColumnNames: id
+            referencedTableName: course
+        - addForeignKeyConstraint:
+            baseColumnNames: course_id
+            baseTableName: video
+            constraintName: FK_VIDEO_ON_COURSEID
+            referencedColumnNames: id
+            referencedTableName: course
+        - addForeignKeyConstraint:
+            baseColumnNames: course_id
+            baseTableName: payment_course
+            constraintName: fk_paycou_on_course
+            referencedColumnNames: id
+            referencedTableName: course
+        - addForeignKeyConstraint:
+            baseColumnNames: payment_id
+            baseTableName: payment_course
+            constraintName: fk_paycou_on_payment
+            referencedColumnNames: id
+            referencedTableName: payment
+        - addForeignKeyConstraint:
+            baseColumnNames: course_id
+            baseTableName: promotion_course
+            constraintName: fk_procou_on_course
+            referencedColumnNames: id
+            referencedTableName: course
+        - addForeignKeyConstraint:
+            baseColumnNames: promotion_id
+            baseTableName: promotion_course
+            constraintName: fk_procou_on_promotion
+            referencedColumnNames: id
+            referencedTableName: promotion
+        - addNotNullConstraint:
+            columnDataType: BIGINT
+            columnName: category_id
+            tableName: course
+            validate: true
+        - addNotNullConstraint:
+            columnDataType: DATETIME
+            columnName: create_at
+            tableName: category
+            validate: true
+        - addNotNullConstraint:
+            columnDataType: DATETIME
+            columnName: create_at
+            tableName: course
+            validate: true
+        - addNotNullConstraint:
+            columnDataType: DATETIME
+            columnName: create_at
+            tableName: users
+            validate: true
+        - modifyDataType:
+            columnName: created_by
+            newDataType: VARCHAR(64)
+            tableName: category
+        - modifyDataType:
+            columnName: created_by
+            newDataType: VARCHAR(64)
+            tableName: course
+

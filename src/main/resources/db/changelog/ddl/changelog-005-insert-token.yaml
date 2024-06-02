@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: token_insert
+      author: sereypanha14@gmail.com
+      changes:
+        - loadData:
+            tableName: token
+            file: db/changelog/data/changelog-005-tokens.csv
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: token
+                  type: STRING
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: NUMERIC
